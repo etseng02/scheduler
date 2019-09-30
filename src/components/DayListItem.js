@@ -1,5 +1,9 @@
 import React from "react";
 
+import "components/DayListItem.scss";
+
+const classNames = require('classnames');
+
 export default function DayListItem(props) {
   return (
     <li onClick={() => props.setDay(props.name)}>
