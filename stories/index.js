@@ -97,7 +97,7 @@ storiesOf("Button", module)
         <InterviewerListItem
           id={interviewer.id}
           name={interviewer.name}
-          src={interviewer.avatar}
+          avatar={interviewer.avatar}
           setInterviewer={action("setInterviewer")}
         />
       ));
