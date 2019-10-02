@@ -176,7 +176,7 @@ storiesOf("Button", module)
           />)
           .add("Form Create", () => 
           <Form
-          name = ""
+          value = ""
           interviewers = {interviewers}
           onSave ={action("onSave")}
           onCancel ={action("onCancel")}
