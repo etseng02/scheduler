@@ -29,19 +29,19 @@ export default function Appointment(props) {
           time = {props.time}
           />
           <Show
-          student={props.student}
-          interviewer={props.interviewer}
+          student={props.interview.student}
+          interviewer={props.interview.interviewer.name}
           />
         </Fragment>
       )
     } else {
       return (
         <Fragment>
-        <Header
-        time = {props.time}
-        />
-        <Empty
-        />
+          <Header
+            time = {props.time}
+          />
+          <Empty
+          />
         </Fragment>
       )
     }
