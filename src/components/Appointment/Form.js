@@ -9,6 +9,16 @@ export default function Form(props) {
     "interviewers__item--selected": props.selected,
   });
 
+  const reset = function() {
+    setName("")
+    setInterviewer(null)
+  }
+
+  const cancel = function() {
+    reset()
+    props.onCancel();
+  }
+
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
@@ -19,12 +29,10 @@ export default function Form(props) {
       <form autoComplete="off">
         <input
           className="appointment__create-input text--semi-bold"
-          name="name"
+          name={name}
           type="text"
           placeholder="Enter Student Name"
-          /*
-            This must be a controlled component
-          */
+          onChange = {setName}
         />
       </form>
       <InterviewerList 
@@ -34,7 +42,7 @@ export default function Form(props) {
     </section>
     <section className="appointment__card-right">
       <section className="appointment__actions">
-        <Button danger onClick = {props.onCancel}>Cancel</Button>
+        <Button danger onClick={() => cancel()}>Cancel</Button>
         <Button confirm onClick = {props.onSave}>Save</Button>
       </section>
     </section>

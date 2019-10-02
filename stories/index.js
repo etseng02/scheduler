@@ -183,6 +183,7 @@ storiesOf("Button", module)
             />)
           .add("Form Edit", () => 
           <Form
+            interviewers = {interviewers}
             message = "Could not delete appointment."
             onClose ={action("onClose")}
             />);
