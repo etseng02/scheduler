@@ -3,7 +3,7 @@ import "components/Application.scss";
 import DayList from "components/DayList"
 //import InterviewerList from "components/InterviewerList"
 import Appointment from "components/Appointment/index.js"
-import { METHODS } from "http";
+//import { METHODS } from "http";
 
 const axios = require('axios');
 
