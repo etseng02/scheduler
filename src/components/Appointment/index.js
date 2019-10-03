@@ -19,8 +19,8 @@ import Show from "components/Appointment/Show.js"
 
 export default function Appointment(props) {
   //const Appointments = props.time.map(Appointment => {
-    console.log(props)
-    console.log("PROPS INTERIVEW:", props.interview)
+    // console.log(props)
+    // console.log("PROPS INTERIVEW:", props.interview)
     
     if (props.interview) {
       return (
