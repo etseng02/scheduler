@@ -48,6 +48,5 @@ export function getInterviewersForDay(state, day) {
       interviewersOnDay.push(element)
     })
   }
-  console.log(interviewersOnDay)
   return interviewersOnDay;
 }
