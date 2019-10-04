@@ -4,7 +4,7 @@ import DayList from "components/DayList"
 //import InterviewerList from "components/InterviewerList"
 import Appointment from "components/Appointment/index.js"
 //import { METHODS } from "http";
-import {getAppointmentsForDay , getInterview }from "../helpers/selectors.js"
+import {getAppointmentsForDay , getInterview, getInterviewersForDay }from "../helpers/selectors.js"
 //import getInterview from "../helpers/selectors.js"
 
 const axios = require('axios');
@@ -94,6 +94,7 @@ export default function Application(props) {
       days: all[0].data,
       appointments: all[1].data,
       interviewers: all[2].data
+
     });
    //setState({ ...state,  });
     //const [first, second, third] = all;
@@ -146,27 +147,25 @@ export default function Application(props) {
 
 
 const appointments = getAppointmentsForDay(state, state.day);
+//console.log("Thsi si the appointments ", appointments)
+
+const interviewerIDs = getInterviewersForDay(state, state.day);
+
+// console.log("THESE ARE THE INTERVIEWER IDS",interviewers)
+
+const interviewers = interviewerIDs.map(id => state.interviewers[id])
 
 const schedule = appointments.map((appointment) => {
 
   const interview = getInterview(state, appointment.interview);
-  if (appointment.interview) {
-    //console.log("THSUITEHISTE INTERVIEW", interview)
-    //console.log("THIS IS THE APPOINTMENT.INTERVIEW DATA I AM LOOKING FOR THANKS", appointment.interview)
-    //console.log(appointment.interview.interviewer)
-  }
-
-  // for (let interviewerss in state.interviewers) {
-  //   console.log(interviewerss)
-  // }
-  //console.log("iNNNTERRVIEWERRR: ", appointment.interview.interviewer)
-
   return (
+    
     <Appointment
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}
       interview={interview}
+      interviewers ={interviewers}
     />
   );
 });

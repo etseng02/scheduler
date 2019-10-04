@@ -38,3 +38,16 @@ export function getInterview(state, interview) {
 
 return newObject
 }
+
+export function getInterviewersForDay(state, day) {
+
+  const interviewersOnDay = []
+  const appointmentDay = state.days.filter(forDay => forDay.name === day)
+  for (let appointment of appointmentDay) {
+    appointment.interviewers.forEach(element => {
+      interviewersOnDay.push(element)
+    })
+  }
+  console.log(interviewersOnDay)
+  return interviewersOnDay;
+}

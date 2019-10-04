@@ -5,9 +5,6 @@ import Button from "components/Button";
 const classNames = require('classnames');
 
 export default function Form(props) {
-  const interviewerClass = classNames("interviewers__item", {
-    "interviewers__item--selected": props.selected,
-  });
 
   const reset = function() {
     setName("")
@@ -39,7 +36,7 @@ export default function Form(props) {
           onChange={(event) => setName(event.target.value)}
         />
       </form>
-      <InterviewerList 
+      <InterviewerList
       interviewers={props.interviewers}
       interviewer={interviewer}
       setInterviewer={setInterviewer} />

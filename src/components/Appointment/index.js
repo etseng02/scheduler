@@ -12,6 +12,7 @@ import Form from "components/Appointment/Form.js"
 
 
 
+
 // All Appointment components will render a Header that takes in a time prop.
 // If props.interview is truthy (an interview object) the Appointment will render 
 // the <Show /> component, else it should render the <Empty /> component.
@@ -37,7 +38,6 @@ export default function Appointment(props) {
 
     function addAppointment() {
       transition(CREATE)
-      console.log("THIS SIS THE NEW MODE THAT I WANT : ", mode)
     }
 
     function goBack() {
@@ -58,7 +58,7 @@ export default function Appointment(props) {
           <Empty onAdd = {() => addAppointment()} />}
           {mode === CREATE && 
           <Form 
-          interviewers = {[]}
+          interviewers = {props.interviewers}
           onCancel = {() => goBack()} />}
         </Fragment>
       )
