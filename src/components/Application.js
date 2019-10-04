@@ -55,12 +55,31 @@ const interviewerIDs = getInterviewersForDay(state, state.day);
 
 const interviewers = interviewerIDs.map(id => state.interviewers[id])
 
+
+function bookInterview(id, interview) {
+  console.log(id, interview);
+
+  const appointment = {
+    ...state.appointments[id],
+    interview: { ...interview }
+  };
+
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+
+  setState({...state, appointments})
+
+}
+
 const schedule = appointments.map((appointment) => {
 
   const interview = getInterview(state, appointment.interview);
   return (
     
     <Appointment
+      bookInterview = {bookInterview}
       key={appointment.id}
       id={appointment.id}
       time={appointment.time}

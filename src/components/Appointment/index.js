@@ -44,6 +44,15 @@ export default function Appointment(props) {
       back()
     }
 
+    function save(name, interviewer) {
+      const interview = {
+      student: name,
+        interviewer
+      };
+      props.bookInterview(props.id, interview)
+      transition(SHOW)
+    }
+
       return (
         <Fragment>
          <Header
@@ -59,60 +68,10 @@ export default function Appointment(props) {
           {mode === CREATE && 
           <Form 
           interviewers = {props.interviewers}
-          onCancel = {() => goBack()} />}
+          onCancel = {() => goBack()} 
+          saveAppointment={save}
+          />}
         </Fragment>
       )
-        
-    
-    
-    // if (props.interview) {
-    //   return (
-    //     <Fragment>
-    //       {mode === SHOW && (
-    //         <Show
-    //         student={props.interview.student}
-    //         interviewer={props.interview.interviewer.name}
-    //         />
-    //         )}
-    //     </Fragment>
-    //     )
-    //   } else if (!props.interview){
-    //     return (
-    //       <Fragment>
-    //       {mode === EMPTY && 
-    //       <Empty onAdd = {() => addAppointment()} />}
-    //       </Fragment>
-    //     )
-    //   }
-    //   if (mode === CREATE) {
-    //     console.log("THIS SIS THE NEW MODE THAT I WANT : ", mode)
-    //   }
-      
-      
-      
-      
-    // if (props.interview) {
-    //   return (
-    //     <Fragment>
-    //       <Header
-    //       time = {props.time}
-    //       />
-    //       {mode === SHOW && (
-    //         <Show
-    //           student={props.interview.student}
-    //           interviewer={props.interview.interviewer}
-    //         />
-    //       )}
-    //     </Fragment>
-    //   )
-    // } else {
-    //   return (
-    //     <Fragment>
-    //       <Header
-    //         time = {props.time}
-    //       />
-    //       {mode === EMPTY && <Empty onAdd={props.onAdd} />}
-    //     </Fragment>
-    //   )
-    // }
+
 }
