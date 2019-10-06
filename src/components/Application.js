@@ -69,11 +69,10 @@ function bookInterview(id, interview) {
       interview: interview
     })
     .then((response) => {
-      //return response
+      return "saved"
     })
     .catch((error) => {
-      console.log(error)
-      return error
+      return "error"
     })
 
 }
