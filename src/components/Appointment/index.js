@@ -35,6 +35,7 @@ export default function Appointment(props) {
     const CONFIRM = "CONFIRM";
     const EDIT = "EDIT";
     const ERROR_SAVE = "ERROR_SAVE"
+    const ERROR_DELETE = "ERROR_DELETE"
     
     const { mode, transition, back } = useVisualMode(
       props.interview ? SHOW : EMPTY
@@ -100,9 +101,16 @@ export default function Appointment(props) {
     
     function deleteAppointment() {
       const interview = null
-      transition(SAVING)
+      transition(SAVING, true)
       props.deleteInterview(props.id, interview)
-      transition(EMPTY)
+      .then((response) => {
+      if (response === "deleted") {
+        transition(EMPTY, true)
+      } else {
+        transition(ERROR_DELETE, true)
+      }
+    })
+
     }
 
       return (
@@ -156,6 +164,12 @@ export default function Appointment(props) {
           <Error
             onClose = {() => goBack()}
             errorMessage = "Could not save appointment"
+          />}
+
+          {mode === ERROR_DELETE && 
+          <Error
+            onClose = {() => goBack()}
+            errorMessage = "Could not delete appointment"
           />}
 
         </Fragment>

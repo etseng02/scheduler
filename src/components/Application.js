@@ -94,17 +94,18 @@ function deleteInterview (id, interview) {
   
   
   
-  axios
+ return axios
   .delete(`/api/appointments/${id}`, {
-    // id: id,
-    // time: "12pm",
-    //interview: {student:null, interviewer:null}
   })
   .then((response) => {
     setState({...state, appointments})
+    return "deleted"
+  })
+  .catch((error) => {
+      return "error"
+    })
     //console.log(response)
     //console.log("state after appointment change", state.appointments)
-  })
 
   
 }
