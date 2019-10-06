@@ -18,23 +18,14 @@ export function getAppointmentsForDay(state, day) {
 export function getInterview(state, interview) {
   let newObject = {}
   if (!interview) {
-    return console.log("interview not found")
+    return;
   }
 
   let interviewerID = interview.interviewer
   let interviewer = state.interviewers[interviewerID]
 
-  //console.log(interviewer)
-  //console.log("STUEEDENT NAME",interview.student)
-
   newObject.student = interview.student
   newObject.interviewer = interviewer
-  //console.log("FEH SUIF HESUIFH EUI", newObject)
-
-
-  // for (let interviews in state.interviewers) {
-  // }
-
 
 return newObject
 }

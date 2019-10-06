@@ -69,13 +69,13 @@ function bookInterview(id, interview) {
       interview: interview
     })
     .then((response) => {
-      console.log(response)
+      //console.log(response)
       
   })
 }
 
 function deleteInterview (id, interview) {
-  console.log(id, interview);
+  //console.log(id, interview);
 
 
   const appointment = {
@@ -100,7 +100,7 @@ function deleteInterview (id, interview) {
   .then((response) => {
     setState({...state, appointments})
     //console.log(response)
-    console.log("state after appointment change", state.appointments)
+    //console.log("state after appointment change", state.appointments)
   })
 
   

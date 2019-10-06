@@ -74,44 +74,52 @@ export default function Appointment(props) {
       transition(EMPTY)
     }
 
-
-    
-
-
       return (
         <Fragment>
+
          <Header
-         time = {props.time}
+          time = {props.time}
          />
+
           {mode === SHOW && (
-            <Show
+          <Show
             student={props.interview.student}
             interviewer={props.interview.interviewer.name}
             onDelete = {() => deleteConfirm()}
             onEdit = {() => editForm()}
-            />)}
+          />)}
+
           {mode === EMPTY && 
-          <Empty onAdd = {() => addAppointment()} />}
+          <Empty
+            onAdd = {() => addAppointment()}
+          />}
+
           {mode === CREATE && 
-          <Form 
-          interviewers = {props.interviewers}
-          onCancel = {() => goBack()} 
-          saveAppointment={save}
+          <Form
+            interviewers = {props.interviewers}
+            onCancel = {() => goBack()} 
+            saveAppointment={save}
           />}
-          {mode === EDIT && 
-          <Form 
-          interviewers = {props.interviewers}
-          onCancel = {() => goBack()} 
-          saveAppointment={save}
-          />}
+
           {mode === SAVING && 
           <Status
           />}
+
           {mode === CONFIRM && 
           <Confirm
           onCancel = {() => goBack()} 
           onConfirm = {() => deleteAppointment()} 
           />}
+
+          {mode === EDIT && 
+          <Form
+            name = {props.interview.student}
+            interviewer = {props.interview.interviewer.id}
+            interviewers = {props.interviewers}
+            onCancel = {() => goBack()} 
+            saveAppointment={save}
+          />}
+
         </Fragment>
       )
 
