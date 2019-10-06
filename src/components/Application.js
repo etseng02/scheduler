@@ -69,9 +69,13 @@ function bookInterview(id, interview) {
       interview: interview
     })
     .then((response) => {
-      //console.log(response)
-      
-  })
+      console.log("THIS IS THE AXIOS RESPONSEE FROM BOOKING AN INTERVIEW!!!! ", response)
+      return response
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
 }
 
 function deleteInterview (id, interview) {

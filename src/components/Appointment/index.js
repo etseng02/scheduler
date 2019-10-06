@@ -11,6 +11,7 @@ import Show from "components/Appointment/Show.js"
 import Form from "components/Appointment/Form.js"
 import Status from "components/Appointment/Status.js"
 import Confirm from "components/Appointment/Confirm.js"
+import Error from "components/Appointment/Error.js"
 
 
 
@@ -33,6 +34,7 @@ export default function Appointment(props) {
     const SAVING = "SAVING";
     const CONFIRM = "CONFIRM";
     const EDIT = "EDIT";
+    const ERROR_SAVE = "ERROR_SAVE"
     
     const { mode, transition, back } = useVisualMode(
       props.interview ? SHOW : EMPTY
@@ -48,14 +50,35 @@ export default function Appointment(props) {
 
 
 
+    // function save(name, interviewer) {
+    //   const interview = {
+    //   student: name,
+    //     interviewer
+    //   };
+    //   transition(SAVING)
+
+    //   //props.bookInterview(props.id, interview)
+    //   //transition(SAVING)
+    //   props.bookInterview(props.id, interview)
+    //   transition(SHOW)
+    // }
+
     function save(name, interviewer) {
       const interview = {
-      student: name,
+        student: name,
         interviewer
       };
-      transition(SAVING)
+    
+      transition(SAVING);
+
+      console.log(props.id, interview)
+    
       props.bookInterview(props.id, interview)
-      transition(SHOW)
+        .then((response) => {
+          console.log(response)
+          transition(SHOW)
+        })
+        .catch(error => transition(ERROR_SAVE, true));
     }
 
 
@@ -118,6 +141,12 @@ export default function Appointment(props) {
             interviewers = {props.interviewers}
             onCancel = {() => goBack()} 
             saveAppointment={save}
+          />}
+
+          {mode === ERROR_SAVE && 
+          <Error
+            onClose = {() => goBack()}
+            errorMessage = "Could not save appointment"
           />}
 
         </Fragment>
