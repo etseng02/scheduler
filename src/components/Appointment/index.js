@@ -77,10 +77,15 @@ export default function Appointment(props) {
         transition(SAVING, true);
         props
           .bookInterview(props.id, interview)
-          .then(() => transition(SHOW));
+          .then((response) => {
+            if (response === "saved") {
+              transition(SHOW)
+            } else {
+              transition(ERROR_SAVE, true)
+            }
+          })
       } else {
-        transition(ERROR_SAVE, true);
-
+        transition(ERROR_SAVE, true)
       }
     }
 
@@ -129,6 +134,7 @@ export default function Appointment(props) {
 
           {mode === SAVING && 
           <Status
+          statusMessage = "Saving"
           />}
 
           {mode === CONFIRM && 

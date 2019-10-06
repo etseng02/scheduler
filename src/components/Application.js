@@ -73,6 +73,7 @@ function bookInterview(id, interview) {
     })
     .catch((error) => {
       console.log(error)
+      return error
     })
 
 }
