@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "components/DayList"
-//import InterviewerList from "components/InterviewerList"
 import Appointment from "components/Appointment/index.js"
-//import { METHODS } from "http";
 import {getAppointmentsForDay , getInterview, getInterviewersForDay }from "../helpers/selectors.js"
-//import getInterview from "../helpers/selectors.js"
 
 const axios = require('axios');
 
@@ -48,17 +45,13 @@ export default function Application(props) {
   });
 },[])
 
+
+//helper Function calls to assist in displaying and booking an interview
 const appointments = getAppointmentsForDay(state, state.day);
-
 const interviewerIDs = getInterviewersForDay(state, state.day);
-
-
 const interviewers = interviewerIDs.map(id => state.interviewers[id])
 
-
 function bookInterview(id, interview) {
-  console.log("THIS IS THE ID", id, interview);
-
   const appointment = {
     ...state.appointments[id],
     interview: { ...interview }
@@ -71,15 +64,46 @@ function bookInterview(id, interview) {
 
   setState({...state, appointments})
 
- 
-    axios
+  axios
     .put(`/api/appointments/${id}`, {
       interview: interview
     })
     .then((response) => {
-      console.log("THSI IS THE RESPONSE OF THE AXIOS REQUEST", response)
-    })
+      console.log(response)
+      
+  })
+}
 
+function deleteInterview (id, interview) {
+  console.log(id, interview);
+
+
+  const appointment = {
+    ...state.appointments[id],
+    interview: null
+  };
+
+  
+  const appointments = {
+    ...state.appointments,
+    [id]: appointment
+  };
+  
+  
+  
+  axios
+  .delete(`/api/appointments/${id}`, {
+    // id: id,
+    // time: "12pm",
+    //interview: {student:null, interviewer:null}
+  })
+  .then((response) => {
+    setState({...state, appointments})
+    //console.log(response)
+    console.log("state after appointment change", state.appointments)
+  })
+
+  
 }
 
 const schedule = appointments.map((appointment) => {
@@ -88,6 +112,7 @@ const schedule = appointments.map((appointment) => {
   return (
     
     <Appointment
+      deleteInterview = {deleteInterview}
       bookInterview = {bookInterview}
       key={appointment.id}
       id={appointment.id}
