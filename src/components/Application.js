@@ -57,7 +57,7 @@ const interviewers = interviewerIDs.map(id => state.interviewers[id])
 
 
 function bookInterview(id, interview) {
-  console.log(id, interview);
+  console.log("THIS IS THE ID", id, interview);
 
   const appointment = {
     ...state.appointments[id],
@@ -70,6 +70,15 @@ function bookInterview(id, interview) {
   };
 
   setState({...state, appointments})
+
+ 
+    axios
+    .put(`/api/appointments/${id}`, {
+      interview: interview
+    })
+    .then((response) => {
+      console.log("THSI IS THE RESPONSE OF THE AXIOS REQUEST", response)
+    })
 
 }
 
