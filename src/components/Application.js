@@ -64,13 +64,12 @@ function bookInterview(id, interview) {
 
   setState({...state, appointments})
 
-  axios
+  return axios
     .put(`/api/appointments/${id}`, {
       interview: interview
     })
     .then((response) => {
-      console.log("THIS IS THE AXIOS RESPONSEE FROM BOOKING AN INTERVIEW!!!! ", response)
-      return response
+      //return response
     })
     .catch((error) => {
       console.log(error)
