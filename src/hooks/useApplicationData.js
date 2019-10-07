@@ -1,17 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 
 const axios = require('axios');
 
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
+
+  //const setDay = day => setState({ ...state, day });
+
+  const SET_DAY = "SET_DAY";
+  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_INTERVIEW = "SET_INTERVIEW";
+  const SET_SPOTS = "SET_SPOTS";
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return {
+          ...state,
+          day: action.value
+        }
+      case SET_APPLICATION_DATA:
+        return {
+          ...state,
+          days: action.value[0].data,
+          appointments: action.value[1].data,
+          interviewers: action.value[2].data
+        }
+      case SET_INTERVIEW:
+        return {
+          ...state,
+          appointments: action.value
+        }
+      case SET_SPOTS:
+        return {
+          ...state
+        }
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
 
-  const setDay = day => setState({ ...state, day });
+
+  const setDay = day => dispatch({
+    type: SET_DAY,
+    value: day
+  });
 
   
 
@@ -26,15 +68,15 @@ export default function useApplicationData() {
       [id]: appointment
     };
   
-    setState({...state, appointments})
-
-
-  
     return axios
     .put(`/api/appointments/${id}`, {
       interview: interview
     })
     .then((response) => {
+      dispatch({
+        type: SET_INTERVIEW,
+        value: appointments
+      });
       return "saved"
     })
     .catch((error) => {
@@ -59,7 +101,10 @@ export default function useApplicationData() {
     .delete(`/api/appointments/${id}`, {
     })
     .then((response) => {
-      setState({...state, appointments})
+      dispatch({
+        type: SET_INTERVIEW,
+        value: appointments
+      });
       return "deleted"
     })
     .catch((error) => {
@@ -82,11 +127,9 @@ export default function useApplicationData() {
         .get("/api/interviewers")
       ),
     ]).then((all) => {
-      setState({ ...state, 
-        days: all[0].data,
-        appointments: all[1].data,
-        interviewers: all[2].data
-  
+      dispatch({
+        type: SET_APPLICATION_DATA,
+        value: all
       });
   
     });
