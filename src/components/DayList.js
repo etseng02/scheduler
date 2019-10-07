@@ -9,8 +9,7 @@ export default function DayList(props) {
     //updateSpots(day)
 
     return (
-      <DayListItem 
-      //missing key
+      <DayListItem
       key ={day.id}
       name={day.name} 
       spots={day.spots} 

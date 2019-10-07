@@ -72,7 +72,7 @@ export default function Appointment(props) {
     
       transition(SAVING);
 
-      console.log(props.id, interview)
+      //console.log(props.id, interview)
     
       if (name && interviewer) {
         transition(SAVING, true);

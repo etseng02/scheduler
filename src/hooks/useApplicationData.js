@@ -43,17 +43,8 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
-  // useEffect(() => {
-  //   console.log(state.days)
-  //   for (let dayss of state.days) {
-  //     console.log("these are the spots remaining: ", dayss.spots)
-  //   }
-  // },[state.appointments])
-
   const recognizeDay = function(day) {
     const daysOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday"]
-    console.log("DAT THE DAY SON",day)
-
     return( daysOfWeek.indexOf(day))
   }
 
@@ -86,9 +77,11 @@ export default function useApplicationData() {
       interview: interview
     })
     .then((response) => {
-      console.log("THIS IS THE ID FROM BOOK INTERIVEW", id)
-      recognizeDay(state.day)
-      updateSpots(state.day, -1)
+
+      if (state.appointments[id].interview === null) {
+        updateSpots(state.day, -1)
+      }
+
       dispatch({
         type: SET_INTERVIEW,
         value: appointments
