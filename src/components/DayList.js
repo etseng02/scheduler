@@ -1,10 +1,12 @@
 import React from "react";
 
 import DayListItem from "components/DayListItem"
+import updateSpots from "hooks/useApplicationData.js";
 
 export default function DayList(props) {
 
   const days = props.days.map(day => {
+    //updateSpots(day)
 
     return (
       <DayListItem 

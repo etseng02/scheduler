@@ -5,8 +5,6 @@ const axios = require('axios');
 
 export default function useApplicationData() {
 
-  //const setDay = day => setState({ ...state, day });
-
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
@@ -24,16 +22,12 @@ export default function useApplicationData() {
           ...state,
           days: action.value[0].data,
           appointments: action.value[1].data,
-          interviewers: action.value[2].data
+          interviewers: action.value[2].data,
         }
       case SET_INTERVIEW:
         return {
           ...state,
           appointments: action.value
-        }
-      case SET_SPOTS:
-        return {
-          ...state
         }
       default:
         throw new Error(
@@ -46,8 +40,27 @@ export default function useApplicationData() {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
   });
+
+  // useEffect(() => {
+  //   console.log(state.days)
+  //   for (let dayss of state.days) {
+  //     console.log("these are the spots remaining: ", dayss.spots)
+  //   }
+  // },[state.appointments])
+
+  const recognizeDay = function(day) {
+    const daysOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday"]
+    console.log("DAT THE DAY SON",day)
+
+    return( daysOfWeek.indexOf(day))
+  }
+
+  const updateSpots = function(day, number) {
+    recognizeDay(day)
+    state.days[recognizeDay(day)].spots = state.days[recognizeDay(day)].spots + number;
+  }
 
 
   const setDay = day => dispatch({
@@ -73,6 +86,9 @@ export default function useApplicationData() {
       interview: interview
     })
     .then((response) => {
+      console.log("THIS IS THE ID FROM BOOK INTERIVEW", id)
+      recognizeDay(state.day)
+      updateSpots(state.day, -1)
       dispatch({
         type: SET_INTERVIEW,
         value: appointments
@@ -101,6 +117,7 @@ export default function useApplicationData() {
     .delete(`/api/appointments/${id}`, {
     })
     .then((response) => {
+      updateSpots(state.day, 1)
       dispatch({
         type: SET_INTERVIEW,
         value: appointments
