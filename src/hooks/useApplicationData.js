@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 const axios = require('axios');
 
@@ -8,7 +8,6 @@ export default function useApplicationData() {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
-  const SET_SPOTS = "SET_SPOTS";
 
   function reducer(state, action) {
     switch (action.type) {
