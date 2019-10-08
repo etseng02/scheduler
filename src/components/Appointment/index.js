@@ -113,6 +113,14 @@ export default function Appointment(props) {
 
     }
 
+    if (props.time === "5pm") {
+      return(
+      <Header
+          time = {props.time}
+         />
+      )
+    }
+
       return (
         <Fragment>
 

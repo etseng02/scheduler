@@ -63,6 +63,7 @@ const schedule = appointments.map((appointment) => {
       </section>
       <section className="schedule">
       {schedule}
+      <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
