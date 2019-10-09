@@ -145,7 +145,7 @@ export default function Appointment(props) {
           <Form
             interviewers = {props.interviewers}
             onCancel = {() => goBack()} 
-            saveAppointment={save}
+            onSave={save}
           />}
 
           {mode === SAVING && 
@@ -165,7 +165,7 @@ export default function Appointment(props) {
             interviewer = {props.interview.interviewer.id}
             interviewers = {props.interviewers}
             onCancel = {() => goBack()} 
-            saveAppointment={save}
+            onSave={save}
           />}
 
           {mode === ERROR_SAVE && 
