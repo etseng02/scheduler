@@ -53,9 +53,10 @@ const fixtures = {
   }
 };
 
-//const axios = jest.genMockFromModule('axios');
 
+//const axios = jest.genMockFromModule('axios');
 export default {
+  defaults: { baseURL: "" },
   get: jest.fn(url => {
     if (url === "/api/days") {
       return Promise.resolve({
