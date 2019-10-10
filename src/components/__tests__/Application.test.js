@@ -6,9 +6,7 @@ import Application from "components/Application";
 
 import { fireEvent } from "@testing-library/react";
 
-import axios from "axios";
-
-
+//mport axios from "axios";
 
 afterEach(cleanup);
 
