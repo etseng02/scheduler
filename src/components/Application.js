@@ -61,7 +61,7 @@ const schedule = appointments.map((appointment) => {
         alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
+      <section className="schedule" data-testid="appointment">
       {schedule}
       <Appointment key="last" time="5pm" />
       </section>
