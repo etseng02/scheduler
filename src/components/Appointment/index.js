@@ -13,25 +13,13 @@ import Status from "components/Appointment/Status.js"
 import Confirm from "components/Appointment/Confirm.js"
 import Error from "components/Appointment/Error.js"
 
-
-
-
-// All Appointment components will render a Header that takes in a time prop.
-// If props.interview is truthy (an interview object) the Appointment will render 
-// the <Show /> component, else it should render the <Empty /> component.
-
-// console.log("helloThere!")
-
-
-
-
-
 export default function Appointment(props) {
     
     const EMPTY = "EMPTY";
     const SHOW = "SHOW";
     const CREATE = "CREATE";
     const SAVING = "SAVING";
+    const DELETING = "DELETING";
     const CONFIRM = "CONFIRM";
     const EDIT = "EDIT";
     const ERROR_SAVE = "ERROR_SAVE"
@@ -49,29 +37,11 @@ export default function Appointment(props) {
       back()
     }
 
-
-
-    // function save(name, interviewer) {
-    //   const interview = {
-    //   student: name,
-    //     interviewer
-    //   };
-    //   transition(SAVING)
-
-    //   //props.bookInterview(props.id, interview)
-    //   //transition(SAVING)
-    //   props.bookInterview(props.id, interview)
-    //   transition(SHOW)
-    // }
-
     function save(name, interviewer) {
       const interview = {
         student: name,
         interviewer
       };
-    
-      transition(SAVING);
-
       //console.log(props.id, interview)
     
       if (name && interviewer) {
@@ -101,7 +71,7 @@ export default function Appointment(props) {
     
     function deleteAppointment() {
       const interview = null
-      transition(SAVING, true)
+      transition(DELETING, true)
       props.deleteInterview(props.id, interview)
       .then((response) => {
       if (response === "deleted") {
@@ -150,7 +120,12 @@ export default function Appointment(props) {
 
           {mode === SAVING && 
           <Status
-          statusMessage = "Saving"
+            statusMessage = "Saving"
+          />}
+
+          {mode === DELETING && 
+          <Status
+            statusMessage = "Deleting"
           />}
 
           {mode === CONFIRM && 

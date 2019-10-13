@@ -111,7 +111,9 @@ export default function useApplicationData() {
     .delete(`/api/appointments/${id}`, {
     })
     .then((response) => {
+      console.log("BEFORE",state.days)
       updateSpots(state.day, 1)
+      console.log("AFTER",state.days)
       dispatch({
         type: SET_INTERVIEW,
         value: appointments

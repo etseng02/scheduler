@@ -47,7 +47,7 @@ const schedule = appointments.map((appointment) => {
         alt="Interview Scheduler"
       />
       <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu">
+      <nav className="sidebar__menu" data-testid="day">
       <DayList
         days={state.days}
         day={state.day}
