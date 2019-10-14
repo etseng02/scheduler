@@ -14,7 +14,8 @@ import Confirm from "components/Appointment/Confirm.js"
 import Error from "components/Appointment/Error.js"
 
 export default function Appointment(props) {
-    
+  
+  //All display modes for each appointment slot
     const EMPTY = "EMPTY";
     const SHOW = "SHOW";
     const CREATE = "CREATE";
@@ -42,24 +43,21 @@ export default function Appointment(props) {
         student: name,
         interviewer
       };
-      //console.log(props.id, interview)
     
       if (name && interviewer) {
         transition(SAVING, true);
-        props
-          .bookInterview(props.id, interview)
-          .then((response) => {
-            if (response === "saved") {
-              transition(SHOW)
-            } else {
-              transition(ERROR_SAVE, true)
-            }
-          })
+        props.bookInterview(props.id, interview)
+        .then((response) => {
+          if (response === "saved") {
+            transition(SHOW)
+          } else {
+            transition(ERROR_SAVE, true)
+          }
+        })
       } else {
         transition(ERROR_SAVE, true)
       }
     }
-
 
     function deleteConfirm () {
       transition(CONFIRM)
@@ -74,15 +72,16 @@ export default function Appointment(props) {
       transition(DELETING, true)
       props.deleteInterview(props.id, interview)
       .then((response) => {
-      if (response === "deleted") {
-        transition(EMPTY, true)
-      } else {
-        transition(ERROR_DELETE, true)
-      }
-    })
-
+        if (response === "deleted") {
+          transition(EMPTY, true)
+        } else {
+          transition(ERROR_DELETE, true)
+        }
+      })
     }
 
+
+    //adds "5pm" to the end of the appointment lists
     if (props.time === "5pm") {
       return(
       <Header

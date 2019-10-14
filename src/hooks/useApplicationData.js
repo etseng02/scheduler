@@ -23,11 +23,13 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
+  //recognizeDay converts the day of the week into an index of weekdays
   const recognizeDay = function(day) {
     const daysOfWeek = ["Monday","Tuesday","Wednesday","Thursday","Friday"]
     return( daysOfWeek.indexOf(day))
   }
 
+  //updateSpots takes the index of the day in relationship to the days of the the week and updates the state based on the action: adding or deleting an appointment
   const updateSpots = function(day, number) {
     recognizeDay(day)
     state.days[recognizeDay(day)].spots = state.days[recognizeDay(day)].spots + number;
@@ -38,8 +40,6 @@ export default function useApplicationData() {
     type: SET_DAY,
     value: day
   });
-
-  
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -58,6 +58,7 @@ export default function useApplicationData() {
     })
     .then((response) => {
 
+      //If adding new appointment, change the state of spots, else assume editing appointment, do not change spots state.
       if (state.appointments[id].interview === null) {
         updateSpots(state.day, -1)
       }
@@ -90,9 +91,7 @@ export default function useApplicationData() {
     .delete(`/api/appointments/${id}`, {
     })
     .then((response) => {
-      console.log("BEFORE",state.days)
       updateSpots(state.day, 1)
-      console.log("AFTER",state.days)
       dispatch({
         type: SET_INTERVIEW,
         value: appointments
