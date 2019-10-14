@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+This is an interview scheduler that is built using react. The scheduler makes axios requests to a database that stores the data and then updates the state to ensure that the components on the screen are updated in real time.
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -9,6 +11,21 @@ Install dependencies with `npm install`.
 ```sh
 npm start
 ```
+
+## Final Product
+
+Here is the view of the scheduler. You can add an appointment by pressing any of the big plus buttons.
+!["Scheduler View"]()
+
+When you press the add appointment button, you will need to enter in the student name and slect the interviewer. The interviewer list is different depending on each day of the week. the interviewer list for the day is retrieved through an axios request to the server and then rendered in this view.
+!["Add an appointment"]()
+
+After hitting the save button you, if the save is sucessful it will go into the show view. If unsucessful, the save will error out.
+!["Show view"]()
+
+If you would like to delete or edit any appointments you may do so. These actions will make axios requests to the database respectively.
+!["Delete view"]()
+
 
 ## Running Jest Test Framework
 
