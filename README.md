@@ -1,10 +1,12 @@
 # Interview Scheduler
 
-This is an interview scheduler that is built using react. The scheduler makes axios requests to a database that stores the data and then updates the state to ensure that the components on the screen are updated in real time.
+This is an interview scheduler that is built using react. The scheduler makes axios requests to an api server to GET and POST data. The application updates the state to ensure that the components on the screen are updated in real time. If there is an error with the axios requests, the client will display an error message.
 
 ## Setup
 
 Install dependencies with `npm install`.
+Install and run API server found at: https://github.com/lighthouse-labs/scheduler-api
+Run application using `npm start`.
 
 ## Running Webpack Development Server
 
